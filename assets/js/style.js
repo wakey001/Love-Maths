@@ -1,21 +1,22 @@
 //wait for the DOM to finish before running game
 // get the button elements and add event listeners to them
-document.addEventListener("DOMcontentloaded", function(){
+document.addEventListener("DOMContentLoaded", function() {
+
     let buttons = document.getElementsByTagName("button");
+
     for (let button of buttons){
         button.addEventListener("click", function() {
             if(this.getAttribute("data-type") === "submit"){
                 checkAnswer();
                 }else {
-                    let gameType = this.attribute("data-type");
+                    let gameType = this.getAttribute("data-type");
                     alert(`You clicked ${gameType}`);
-                    runGame(gameType);
-
+                    runGame(gameType);}
                 
-            }
+            
         }
-    )}
-       runGame("addition");
+    )}    
+    runGame("addition");   
 })  
 /**
  * the main game "loop", called when the script is first loaded
@@ -32,7 +33,7 @@ function runGame(gameType){
     }else if (gameType === "multiply"){
         displayMultiplyQuestion(num1, num2);
     }else if (gameType === "subtract"){
-        displayMultiplyQuestion(num1, num2);
+        displaySubtractQuestion(num1, num2);
     }else{
         alert(`Unknown game type: ${gameType}`);
         throw  `Unknown game type:${gameType}. Aborting!`;
@@ -47,7 +48,7 @@ function runGame(gameType){
 function checkAnswer(){
     let userAnswer = parseInt(document.getElementById("answer-box").value);
     let calculatedAnswer = calculateCorrectAnswer();
-    let isCorrect = userAnswer === calculatedAnswer(0);
+    let isCorrect = userAnswer === calculatedAnswer[0];
 
     if(isCorrect) {
         alert("Hey you got it right!");
@@ -113,7 +114,7 @@ function displaySubtractQuestion(operand1, operand2) {
 }
 function displayMultiplyQuestion(operand1, operand2) {
     document.getElementById('operand1').textContent = operand1;
-    document.getElementById('operand2').textContent = operand;
+    document.getElementById('operand2').textContent = operand2;
     document.getElementById('operator').textContent = "x";
 
 
